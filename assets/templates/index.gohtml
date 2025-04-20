@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Mašinilica - Inspirisano transparentom Mašinci protiv mašinerije</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="HandheldFriendly" content="True" />
+    <meta http-equiv="Content-Language" content="sr" />
+    <meta name="description" content="Koristeći font inspirisan transparentom Mašinci protiv Mašinerije kreirajte svoje poruke i podelite ih na društvenim mrežama" />
+
+    <meta property="og:image" content="https://masinilica.com/images/share_image.png"/>
+    <meta name="twitter:image" content="https://masinilica.com/images/share_image.png"/>    
+
+    <meta property="og:title" content="Mašinilica - Inspirisano transparentom Mašinci protiv mašinerije"/>
+    <meta property="og:description" content="Koristeći font inspirisan transparentom Mašinci protiv Mašinerije kreirajte svoje poruke i podelite ih na društvenim mrežama"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mašinilica"/>
+    <meta property="og:url" content="https://masinilica.com/" />
+
+    <meta name="twitter:title" content="Mašinilica - Inspirisano transparentom Mašinci protiv mašinerije"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:description" content="Koristeći font inspirisan transparentom Mašinci protiv Mašinerije kreirajte svoje poruke i podelite ih na društvenim mrežama" />
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script defer async data-host="masinilica.com" src="https://liteanalytics.com/lite.js"></script>
+
+     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .button-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        form textarea {
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 8px;
+            resize: vertical;
+        }
+
+        form button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.img {
+            margin-top: 20px;
+            border: 1px solid silver;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: grey;
+            font-size: 0.8rem;
+            line-height: 1rem;
+        }
+        .footer a {
+            color: grey;
+            text-decoration: underline;
+        }
+        .radio-btn {
+            display: inline-block;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 3px;
+            font-family: sans-serif;
+        }
+
+        .radio-group input[type="radio"] {
+            display: none; /* sakrij radio kružiće */
+        }
+
+        .radio-group label {
+            font-size: 0.9rem;
+            border-radius: 10px;
+            background-color: #d9d9d9;
+            padding: 6px 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .radio-group input[type="radio"]:checked + label {
+            background-color: #333333;
+            color: white;
+        }
+
+        button {
+            all: unset;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-family: sans-serif;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #1a88ff;
+        }
+
+        button:active {
+            background-color: #1a88ff;
+        }
+
+    </style>
+
+</head>
+<body x-data="app()">
+
+    <main>
+        <div class="container">
+            <div style="min-height: 700px;">
+                <div style="text-align: center; margin: 5px 0;"><img src="/images/masinilica.png" alt="masinilica.com" style="width: 250px;"/></div>
+                <form @submit.prevent="generateImage" >
+                    <textarea x-model="text" rows="7" spellcheck="false" placeholder="Unesi tekst i vidi kako bi izgledao na transparentu Mašinaca protiv Mašinerije..." required></textarea><br>
+
+                    <div style="margin-top: 15px; display: flex; justify-content: center;">
+                        <div class="radio-group" style="margin: 0 auto;">
+                            <input type="radio" id="small" name="font-size" value="small" x-model="fontSize">
+                            <label for="small">Mala slova</label>
+
+                            <input type="radio" id="normal" name="font-size" value="normal" x-model="fontSize">
+                            <label for="normal">Normalna slova</label>
+
+                            <input type="radio" id="large" name="font-size" value="large" x-model="fontSize">
+                            <label for="large">Velika slova</label>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; display: flex; justify-content: center;">
+                        <div class="radio-group" style="margin: 0 auto;">
+                                <input type="radio" id="left" name="align" value="left" x-model="align" />
+                                <label for="left">Poravnaj levo</label>
+                            
+                                <input type="radio" id="center" name="align" value="center" x-model="align" />
+                                <label for="center">Centriraj</label>
+                            
+                                <input type="radio" id="right" name="align" value="right" x-model="align" />
+                                <label for="right">Poravnaj desno</label>
+                            </label>
+                        </div>
+                    </div>             
+
+                    <div style="margin-top: 15px; display: flex; justify-content: center;">
+                        <div>
+                        <input type="checkbox" id="dark-mode" name="dark" x-model="darkMode" />  <label for="dark-mode">Dark mod</label>    
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button type="submit">Generiši sliku</button>
+                    </div>
+                </form>
+
+                <template x-if="imageUrl">                
+                    <div>
+                        <div class="img"><img :src="imageUrl" alt="Generisana slika" /></div>
+                        <div style="text-align: center; padding: 12px 20px; margin-top: 5px; background-color: #d9d9d9; border-radius: 5px;">
+                            <p>Generisanu sliku možete snimiti ili deliti dalje sa svog telefona tako što pritisnete i držite prst na slici dok vam se ne otvori meni iz koga možete snimiti ili proslediti sliku.</p>
+                            <p>Zbog načina na koji rade društvene mreže, obično je najbolje prvo snimiti sliku na telefon pa je potom podeliti ručno.</p>
+                            <p>Na računaru sliku možete lako snimiti desnim klikom miša na generisanu fotografiju i izborom snimanja slike iz menija.</p>
+
+                            {{/* <p>Generisanu sliku možete podeliti i korišćenjem donjih linkova, ali rezultat možda neće biti onakak
+
+                            <div>
+                                <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="https://nstatic.net/img/social/social_facebook.png" alt="Share on Facebook" style="width: 30px; height: 30px;"></a>
+                                <a :href="'viber://forward?text=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="/images/social_viber.png" alt="Share on Viber" style="width: 30px; height: 30px;"></a>
+                                <a :href="'https://www.threads.net/intent/post?url=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="/images/social_threads.png" alt="Share on Threads" style="width: 32px; height: 32px;"></a>
+                                <a :href="'https://twitter.com/intent/tweet?text=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="/images/social_x.png" alt="Share on X" style="width: 30px; height: 30px;"></a>
+                            </div> */}}
+                            
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="footer">
+                <div>Inspirisan transparentom "Mašinci protiv mašinerije" font kreirao <a href="https://x.com/DavorinDinic" target="_blank">@DavorinDinic</a>. Inspirisan Davorinovim fontom web app kreirao <a href="https://x.com/mileusna" target="_blank">@mileusna</a></div>
+                <br/>
+                <div>Nismo mašinci ni autori transparenta "Mašinci protiv mašinerije" niti smo na bilo koji 
+                način zaslužni za legendu koja ga prati. Ukoliko "Mašinci protiv mašinerije" imaju nešto protiv načina na koji koristimo njihovo delo, molimo ih da nam se jave.</div>
+                <br/>
+                <div>Privatnost korisnika: Sajt ne koristi kukije, tekstovi koje unosite se nigde ne beleže, generisane slike se nigde ne snimaju. Izvorni kod je javno dostupan na GitHub (uskoro) pod MIT licencom.</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function app() {
+            return {
+                text: '',
+                imageUrl: '', 
+                fontSize: 'normal',
+                align: 'left',
+                darkMode: false,
+                generateImage() {
+                    const encoded = encodeURIComponent(this.text.trim());
+                    const fs = encodeURIComponent(this.fontSize.trim());
+                    const al = encodeURIComponent(this.align.trim());
+                    const dm = this.darkMode ? '1' : '0';
+                    const timestamp = Date.now();
+                    if (!encoded) return alert("Unesite tekst.");
+                    this.imageUrl = `/masinilica.png?text=${encoded}&fs=${fs}&al=${al}&dm=${dm}&ts=${timestamp}`;
+                }
+            }
+        }
+    </script>    
+
+</body>
+</html>
