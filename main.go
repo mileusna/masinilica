@@ -1,9 +1,10 @@
 package main
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 	"log"
-	"math/rand"
 	"net/http"
 	"text/template"
 
@@ -68,7 +69,7 @@ func generateHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "image/png")
 	if r.FormValue("dl") == "1" {
-		w.Header().Set("Content-Disposition", `attachment; filename="`+randFilename(12)+`.png"`)
+		w.Header().Set("Content-Disposition", `attachment; filename="`+generateFilename(r.URL.RawQuery)+`.png"`)
 	}
 	w.Write(png)
 }
@@ -82,12 +83,9 @@ func getFont(fontPath string) (*opentype.Font, error) {
 	return opentype.Parse(fontBytes)
 }
 
-const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-func randFilename(n int) string {
-	b := make([]byte, n)
-	for i := range b {
-		b[i] = letters[rand.Intn(len(letters))]
-	}
-	return string(b)
+// generateFilename based on request URI
+func generateFilename(s string) string {
+	h := sha1.New()
+	h.Write([]byte(s))
+	return hex.EncodeToString(h.Sum(nil))
 }
