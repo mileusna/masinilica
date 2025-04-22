@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"text/template"
 
@@ -66,6 +67,9 @@ func generateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "image/png")
+	if r.FormValue("dl") == "1" {
+		w.Header().Set("Content-Disposition", `attachment; filename="`+randFilename(12)+`.png"`)
+	}
 	w.Write(png)
 }
 
@@ -76,4 +80,14 @@ func getFont(fontPath string) (*opentype.Font, error) {
 		return nil, err
 	}
 	return opentype.Parse(fontBytes)
+}
+
+const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+func randFilename(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
 }

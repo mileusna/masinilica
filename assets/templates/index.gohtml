@@ -200,7 +200,9 @@
                     <div>
                         <div class="img"><img :src="imageUrl" alt="Generisana slika" /></div>
                         <div style="text-align: center; padding: 12px 20px; margin-top: 5px; background-color: #d9d9d9; border-radius: 5px;">
-                            <p>Generisanu sliku možete snimiti ili deliti dalje sa svog telefona tako što pritisnete i držite prst na slici dok vam se ne otvori meni iz koga možete snimiti ili proslediti sliku.</p>
+                            <a :href="imageUrl + '&dl=1'"><button type="button" style="font-size: 1rem;">Preuzmi sliku</button></a>
+                            <br/>
+                            <p>Ukoliko vam gornje dugme za preuzimanje slike ne radi (zavisno od telefona i operativnog sistema), generisanu sliku možete snimiti ili deliti dalje sa svog telefona tako što pritisnete i držite prst na slici dok vam se ne otvori meni iz koga možete snimiti ili proslediti sliku.</p>
                             <p>Zbog načina na koji rade društvene mreže, obično je najbolje prvo snimiti sliku na telefon pa je potom podeliti ručno.</p>
                             <p>Na računaru sliku možete lako snimiti desnim klikom miša na generisanu fotografiju i izborom snimanja slike iz menija.</p>
 
