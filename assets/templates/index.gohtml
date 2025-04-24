@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Mašinilica - Inspirisano transparentom Mašinci protiv Mašinerije</title>
+    <title>Mašinilica font - Inspirisano transparentom Mašinci protiv Mašinerije</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <meta name="HandheldFriendly" content="True" />
@@ -80,9 +80,22 @@
             border-radius: 5px;
         }
 
+        .font-dl {
+            text-align: center;
+            padding: 0 30px;
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1rem;
+            color: #333333;
+        }       
+        .font-dl a {
+            color: #333333;;
+            text-decoration: underline;
+        }
+
         .footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
             color: grey;
             font-size: 0.8rem;
             line-height: 1rem;
@@ -91,6 +104,9 @@
             color: grey;
             text-decoration: underline;
         }
+
+
+
         .radio-btn {
             display: inline-block;
             font-size: 0.8rem;
@@ -155,7 +171,7 @@
     <main>
         <div class="container">
             <div style="min-height: 700px;">
-                <div style="text-align: center; margin: 5px 0;"><img src="/images/masinilica.png" alt="masinilica.com" style="width: 250px;"/></div>
+                <h1 style="font-size: 1rem; text-align: center; margin: 5px 0;"><a href="/"><img src="/images/masinilica.png" alt="Mašinci protiv Mašinerije font" style="width: 250px; border: 0;"/></a></h1>
                 <form @submit.prevent="generateImage" >
                     <textarea x-model="text" rows="7" spellcheck="false" placeholder="Unesi tekst i vidi kako bi izgledao na transparentu Mašinaca protiv Mašinerije..." required></textarea><br>
 
@@ -220,6 +236,8 @@
                     </div>
                 </template>
             </div>
+
+            <div class="font-dl">Ukoliko vam je potreban "mašinilica" font da biste ga koristili na vašem računaru, možete ga preuzeti <a href="https://drive.google.com/drive/u/0/folders/1NXIiZO58QESZEGfU1oVeR8rN43pQi65L" target="_blank">ovde</a>.</div>
             <div class="footer">
                 <div>Inspirisan transparentom "Mašinci protiv mašinerije" font kreirao <a href="https://x.com/DavorinDinic" target="_blank">@DavorinDinic</a>. Inspirisan Davorinovim fontom web app kreirao <a href="https://x.com/mileusna" target="_blank">@mileusna</a>.</div>
                 <br/>
