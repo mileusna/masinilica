@@ -43,6 +43,19 @@
             padding: 20px;
         }
 
+        h1 {
+            font-size: 1rem;
+            text-align: center;
+            margin: 5px 0 20px 0;
+            font-weight: 500;
+            color: #333333;
+        }
+
+        h1 span { white-space: nowrap; }
+        h1 img { width: 250px; border: 0; }
+
+        section { min-height: 700px; }
+
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -56,9 +69,16 @@
 
         form textarea {
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             padding: 8px;
             resize: vertical;
+        }
+
+        form textarea::placeholder {
+            color: #888;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.7rem;
         }
 
         form button {
@@ -105,7 +125,7 @@
             text-decoration: underline;
         }
 
-
+        .dark-mode-container {margin-top: 15px; display: flex; justify-content: center;}
 
         .radio-btn {
             display: inline-block;
@@ -113,9 +133,14 @@
             margin: 0 5px;
         }
 
+        .radio-container {
+            margin-top: 15px; display: flex; justify-content: center;
+        }
+
         .radio-group {
             display: flex;
             gap: 3px;
+            margin: 0 auto;
             font-family: sans-serif;
         }
 
@@ -163,6 +188,9 @@
             background-color: #1a88ff;
         }
 
+        .dl-box {text-align: center; padding: 12px 20px; margin-top: 5px; background-color: #d9d9d9; border-radius: 5px;}
+        .dl-box button {font-size: 1rem;}
+
     </style>
 
 </head>
@@ -170,13 +198,17 @@
 
     <main>
         <div class="container">
-            <div style="min-height: 700px;">
-                <h1 style="font-size: 1rem; text-align: center; margin: 5px 0;"><a href="/"><img src="/images/masinilica.png" alt="Mašinci protiv Mašinerije font" style="width: 250px; border: 0;"/></a></h1>
+            <section>
+                <h1>
+                    <a href="/" title="masinilica.com"><img src="/images/masinilica.png" alt="Mašinci protiv Mašinerije font"/></a>
+                    <br/>
+                    Font insipirisan transparentom <span>"Mašinci protiv Mašinerije"</spam>
+                </h1>
                 <form @submit.prevent="generateImage" >
-                    <textarea x-model="text" rows="7" spellcheck="false" placeholder="Unesi tekst i vidi kako bi izgledao na transparentu Mašinaca protiv Mašinerije..." required></textarea><br>
+                    <textarea x-model="text" rows="7" spellcheck="false" placeholder="Unesi svoj tekst i vidi kako bi izgledao na transparentu Mašinaca protiv Mašinerije, podeli generisanu sliku sa svojim prijateljima ili na društvenim mrežama." required></textarea><br>
 
-                    <div style="margin-top: 15px; display: flex; justify-content: center;">
-                        <div class="radio-group" style="margin: 0 auto;">
+                    <div class="radio-container">
+                        <div class="radio-group">
                             <input type="radio" id="small" name="font-size" value="small" x-model="fontSize">
                             <label for="small">Mala slova</label>
 
@@ -188,8 +220,8 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; display: flex; justify-content: center;">
-                        <div class="radio-group" style="margin: 0 auto;">
+                    <div class="radio-container">
+                        <div class="radio-group">
                                 <input type="radio" id="left" name="align" value="left" x-model="align" />
                                 <label for="left">Poravnaj levo</label>
                             
@@ -202,7 +234,7 @@
                         </div>
                     </div>             
 
-                    <div style="margin-top: 15px; display: flex; justify-content: center;">
+                    <div class="dark-mode-container">
                         <div>
                         <input type="checkbox" id="dark-mode" name="dark" x-model="darkMode" />  <label for="dark-mode">Dark mod</label>    
                         </div>
@@ -216,15 +248,13 @@
                 <template x-if="imageUrl">                
                     <div>
                         <div class="img"><img :src="imageUrl" alt="Generisana slika" /></div>
-                        <div style="text-align: center; padding: 12px 20px; margin-top: 5px; background-color: #d9d9d9; border-radius: 5px;">
-                            <a :href="imageUrl + '&dl=1'"><button type="button" style="font-size: 1rem;">Preuzmi sliku</button></a>
+                        <div class="dl-box">
+                            <a :href="imageUrl + '&dl=1'"><button type="button">Preuzmi sliku</button></a>
                             <br/>
-                            <p>Ukoliko vam gornje dugme za preuzimanje slike ne radi (zavisno od telefona i operativnog sistema), generisanu sliku možete snimiti ili deliti dalje sa svog telefona tako što pritisnete i držite prst na slici dok vam se ne otvori meni iz koga možete snimiti ili proslediti sliku.</p>
-                            <p>Zbog načina na koji rade društvene mreže, obično je najbolje prvo snimiti sliku na telefon pa je potom podeliti ručno.</p>
-                            <p>Na računaru sliku možete lako snimiti desnim klikom miša na generisanu fotografiju i izborom snimanja slike iz menija.</p>
+                            <p>Ukoliko vam gornje dugme za preuzimanje slike ne radi (zavisno od vašeg telefona i pregledača koji koristite), generisanu sliku možete snimiti ili deliti dalje sa svog telefona tako što pritisnete i držite prst na slici dok vam se ne otvori meni iz koga možete snimiti ili proslediti sliku.</p>
+                            <p>Zbog načina na koji rade društvene mreže, obično je najbolje prvo snimiti sliku na telefon ili računar, pa je potom podeliti ručno.</p>
 
                             {{/* <p>Generisanu sliku možete podeliti i korišćenjem donjih linkova, ali rezultat možda neće biti onakak
-
                             <div>
                                 <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="https://nstatic.net/img/social/social_facebook.png" alt="Share on Facebook" style="width: 30px; height: 30px;"></a>
                                 <a :href="'viber://forward?text=' + encodeURIComponent('https://masinilica.com'+imageUrl)" target="_blank"><img src="/images/social_viber.png" alt="Share on Viber" style="width: 30px; height: 30px;"></a>
@@ -235,16 +265,16 @@
                         </div>
                     </div>
                 </template>
-            </div>
+            </section>
 
             <div class="font-dl">Ukoliko vam je potreban "mašinilica" font da biste ga koristili na vašem računaru, možete ga preuzeti <a href="https://drive.google.com/drive/u/0/folders/1NXIiZO58QESZEGfU1oVeR8rN43pQi65L" target="_blank">ovde</a>.</div>
             <div class="footer">
                 <div>Inspirisan transparentom "Mašinci protiv mašinerije" font kreirao <a href="https://x.com/DavorinDinic" target="_blank">@DavorinDinic</a>. Inspirisan Davorinovim fontom web app kreirao <a href="https://x.com/mileusna" target="_blank">@mileusna</a>.</div>
                 <br/>
                 <div>Nismo mašinci ni autori transparenta "Mašinci protiv mašinerije" niti smo na bilo koji 
-                način zaslužni za legendu koja ga prati. Ukoliko "Mašinci protiv mašinerije" imaju nešto protiv načina na koji koristimo njihovo delo, molimo ih da nam se jave.</div>
+                način zaslužni za legendu koja ga prati. Ukoliko se "Mašinci protiv mašinerije" ne slažu sa načinom na koji koristimo njihovo delo, molimo ih da nam se jave.</div>
                 <br/>
-                <div>Privatnost korisnika: Sajt ne koristi kukije, tekstovi koje unosite se nigde ne beleže, generisane slike se nigde ne snimaju. Izvorni kod je javno dostupan na <a href="https://github.com/mileusna/masinilica" target="_blank">GitHub</a> pod MIT licencom.</div>
+                <div>Privatnost korisnika: Sajt ne koristi kukije, tekstovi koje unosite se nigde ne beleže, generisane slike se nigde ne snimaju. Izvorni kod <i>open source</i> i je javno dostupan na <a href="https://github.com/mileusna/masinilica" target="_blank">GitHub</a>.</div>
             </div>
         </div>
     </main>
